@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="backWay()">{{ reverseText }}</button>
+
+        <h3>Список элементов:</h3>
+        <button 
+            v-for="element in elements" 
+            @click="deleteElement(element)"
+            :key="element.id"
+        >
+            {{ `${element.name} ${element.id}` }}
+        </button>
+        <div>
+            <button @click="addElement()">Добавить</button>
+        </div>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue ({
+            el: '#app',
+            data: {
+                reverseText: 'Перевернуть текст кнопки',
+                elements: [
+                    {id: 1, name: 'Элемент'}, 
+                    {id: 2, name: 'Элемент'}, 
+                    {id: 3, name: 'Элемент'}, 
+                    {id: 4, name: 'Элемент'}, 
+                    {id: 5, name: 'Элемент'}, 
+                ],          
+            },
+            methods: {
+                backWay() {
+                    this.reverseText = this.reverseText.split('').reverse().join('');
+                },
+                addElement() {
+                    count = this.elements.length + 1;
+                    this.elements.push({id: count, name: 'Новый элемент списка'})
+                },
+                deleteElement(element) {
+                    index = this.elements.indexOf(element);
+                    this.elements.splice(index, 1);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
